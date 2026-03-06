@@ -77,7 +77,7 @@ contest on
 Disable contest mode:
 
 ```
-contest off
+contest off // won't work
 ```
 
 Check current status:
