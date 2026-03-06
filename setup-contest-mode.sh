@@ -80,8 +80,8 @@ sudo chmod +x /usr/local/bin/contest
 
 echo ""
 echo "Setup completed!"
-echo ""
-echo "Commands available:"
-echo "contest on"
-echo "contest off"
-echo "contest status"
+#echo ""
+#echo "Commands available:"
+#echo "contest on"
+#echo "contest off"
+#echo "contest status"
