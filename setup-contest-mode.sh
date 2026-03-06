@@ -10,7 +10,14 @@ echo "Creating contest command..."
 sudo tee /usr/local/bin/contest > /dev/null << 'EOF'
 #!/bin/bash
 
-ALLOWED_DOMAINS=("codeforces.com" "atcoder.jp" "hackerrank.com")
+ALLOWED_DOMAINS=(
+"codeforces.com"
+"atcoder.jp"
+"hackerrank.com"
+"www.hackerrank.com"
+"cdn.hackerrank.com"
+"hrcdn.net"
+)
 
 enable() {
 
@@ -28,9 +35,12 @@ sudo iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT
 
 for domain in "${ALLOWED_DOMAINS[@]}"; do
 
-    ips=$(dig +short $domain)
+    echo "Resolving $domain"
+
+    ips=$(dig +short $domain | grep -E '^[0-9.]+$')
 
     for ip in $ips; do
+        echo "Allowing $ip"
         sudo iptables -A OUTPUT -d $ip -j ACCEPT
     done
 
@@ -68,10 +78,10 @@ status)
 status
 ;;
 *)
-echo "Usage:"
-echo "contest on"
-echo "contest off"
-echo "contest status"
+#echo "Usage:"
+#echo "contest on"
+#echo "contest off"
+#echo "contest status"
 ;;
 esac
 EOF
@@ -80,8 +90,3 @@ sudo chmod +x /usr/local/bin/contest
 
 echo ""
 echo "Setup completed!"
-#echo ""
-#echo "Commands available:"
-#echo "contest on"
-#echo "contest off"
-#echo "contest status"
