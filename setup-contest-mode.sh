@@ -61,7 +61,7 @@ case "$1" in
 on)
 enable
 ;;
-off)
+off-admin)
 disable
 ;;
 status)
